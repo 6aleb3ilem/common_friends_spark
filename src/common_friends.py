@@ -1,13 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-PROJET SPARK: RECHERCHE D'AMIS COMMUNS
-=====================================
-Ce programme utilise Apache Spark pour analyser un graphe social
-et trouver les amis communs entre utilisateurs.
-
-Auteur: [Votre nom]
-Date: Juillet 2025
-"""
 
 import os
 import sys
@@ -43,7 +33,6 @@ def creer_session_spark():
     """
     Crée une session Spark avec la configuration appropriée.
     
-    QU'EST-CE QU'UNE SESSION SPARK?
     - C'est le point d'entrée principal pour utiliser Spark
     - Elle coordonne l'exécution des tâches sur plusieurs processeurs
     - Elle gère la mémoire et les ressources système
@@ -69,7 +58,6 @@ def charger_donnees_pyspark(chemin_fichier):
     """
      1: Charge et analyse le fichier de données des amis.
     
-    COMMENT ÇA MARCHE?
     - Lit le fichier ligne par ligne
     - Sépare chaque ligne en: ID utilisateur, nom, liste d'amis
     - Convertit les données en format utilisable par Spark
@@ -126,12 +114,7 @@ def generer_couples_amis(donnees_utilisateurs):
     """
      2: Génère tous les couples d'utilisateurs possibles.
     
-    PRINCIPE:
-    - Pour N utilisateurs, on crée N*(N-1)/2 couples
-    - Chaque couple est trié (ID_min, ID_max) pour éviter les doublons
-    - Exemple: (1,2) et (2,1) deviennent tous les deux (1,2)
     
-    POURQUOI TRIER LES COUPLES?
     - Évite de traiter deux fois la même paire
     - (1,2) et (2,1) représentent la même relation d'amitié
     """
@@ -173,16 +156,12 @@ def calculer_amis_communs(couples_generes, dictionnaire_amis, dictionnaire_noms)
     """
      3: Calcule les amis communs pour chaque couple d'utilisateurs.
     
-    ALGORITHME:
     - Pour chaque couple (A, B)
     - Récupère les amis de A et les amis de B
     - Calcule l'intersection (amis présents dans les deux listes)
     - Stocke le résultat si des amis communs existent
     
-    EXEMPLE:
-    - Sidi (1) a comme amis: [2, 3, 4]
-    - Mohamed (2) a comme amis: [1, 3, 5]
-    - Intersection: [3] -> Aicha est leur ami commun
+    
     """
     print("\n 3: Calcul des amis communs")
     print("-" * 50)
@@ -220,7 +199,6 @@ def filtrer_mohamed_sidi(resultats_amis_communs, dictionnaire_noms):
     """
      4: Filtre et affiche les amis communs entre Mohamed (ID 2) et Sidi (ID 1).
     
-    PROCESSUS:
     - Recherche la paire normalisée (1, 2) dans les résultats
     - Extrait les amis communs pour cette paire spécifique
     - Prépare l'affichage au format demandé
@@ -251,7 +229,7 @@ def verifier_normalisation_paire(paire_cible):
     """
      5: Vérifie que la paire est bien normalisée (ID min, ID max).
     
-    DEFINITION DE NORMALISATION:
+    NORMALISATION:
     - Dans une paire (A, B), A doit toujours être <= B
     - Cela garantit l'unicité: (1,2) et (2,1) deviennent (1,2)
     - Permet une recherche efficace dans les résultats
@@ -318,9 +296,7 @@ def afficher_resultat_final(paire_cible, amis_communs, fichier_sortie="output/re
 # ====================================================================
 def main():
     """
-    Fonction principale qui orchestre l'exécution de toutes les tâches.
     
-    FLUX D'EXECUTION:
     1. Configuration de Spark
     2. Chargement des données
     3. Génération des couples
