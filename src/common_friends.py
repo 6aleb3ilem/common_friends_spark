@@ -5,14 +5,11 @@ from datetime import datetime
 from pyspark.sql import SparkSession
 from pyspark import SparkContext, SparkConf
 
-# ====================================================================
 #  0: CONFIGURATION DE L'ENVIRONNEMENT SPARK
-# ====================================================================
 def configurer_environnement_spark():
     """
     Configure les variables d'environnement pour que Spark trouve Python.
     
-    POURQUOI CETTE FONCTION?
     - Sur Windows, Spark cherche 'python3' mais Windows utilise 'python.exe'
     - Cette fonction dit à Spark où trouver l'interpréteur Python
     """
@@ -23,7 +20,7 @@ def configurer_environnement_spark():
     os.environ['PYSPARK_PYTHON'] = chemin_python
     os.environ['PYSPARK_DRIVER_PYTHON'] = chemin_python
     
-    # Configuration additionnelle pour Windows
+    # Configuration additionnelle
     os.environ['HADOOP_HOME'] = 'C:\\hadoop'
     os.environ['SPARK_LOCAL_HOSTNAME'] = 'localhost'
     
@@ -51,9 +48,7 @@ def creer_session_spark():
     
     return spark, sc
 
-# ====================================================================
 #  1: CHARGER LES DONNEES A L'AIDE DE PYSPARK
-# ====================================================================
 def charger_donnees_pyspark(chemin_fichier):
     """
      1: Charge et analyse le fichier de données des amis.
@@ -107,9 +102,7 @@ def charger_donnees_pyspark(chemin_fichier):
     print(f"RESULTAT  1: {len(donnees_utilisateurs)} utilisateurs chargés")
     return donnees_utilisateurs
 
-# ====================================================================
 #  2: GENERER TOUS LES COUPLES D'AMIS POSSIBLES
-# ====================================================================
 def generer_couples_amis(donnees_utilisateurs):
     """
      2: Génère tous les couples d'utilisateurs possibles.
@@ -149,9 +142,7 @@ def generer_couples_amis(donnees_utilisateurs):
     print(f"RESULTAT  2: {len(couples_generes)} couples générés")
     return couples_generes, dictionnaire_amis, dictionnaire_noms
 
-# ====================================================================
 #  3: CALCULER LES AMIS COMMUNS POUR CHAQUE PAIRE
-# ====================================================================
 def calculer_amis_communs(couples_generes, dictionnaire_amis, dictionnaire_noms):
     """
      3: Calcule les amis communs pour chaque couple d'utilisateurs.
@@ -192,9 +183,7 @@ def calculer_amis_communs(couples_generes, dictionnaire_amis, dictionnaire_noms)
     print(f"RESULTAT  3: {len(resultats_amis_communs)} couples avec amis communs")
     return resultats_amis_communs
 
-# ====================================================================
 #  4: FILTRER LES RESULTATS POUR MOHAMED ET SIDI
-# ====================================================================
 def filtrer_mohamed_sidi(resultats_amis_communs, dictionnaire_noms):
     """
      4: Filtre et affiche les amis communs entre Mohamed (ID 2) et Sidi (ID 1).
@@ -222,9 +211,7 @@ def filtrer_mohamed_sidi(resultats_amis_communs, dictionnaire_noms):
         print(f"Aucun ami commun trouvé pour la paire {paire_cible}")
         return paire_cible, []
 
-# ====================================================================
 #  5: VERIFICATION DE LA NORMALISATION DES PAIRES
-# ====================================================================
 def verifier_normalisation_paire(paire_cible):
     """
      5: Vérifie que la paire est bien normalisée (ID min, ID max).
@@ -251,9 +238,7 @@ def verifier_normalisation_paire(paire_cible):
     
     return paire_cible
 
-# ====================================================================
 #  6: AFFICHAGE AU FORMAT DEMANDE
-# ====================================================================
 def afficher_resultat_final(paire_cible, amis_communs, fichier_sortie="output/resultats.txt"):
     """
      6: Affiche le résultat au format: ID1 ID2 [liste_amis_communs]
@@ -291,9 +276,7 @@ def afficher_resultat_final(paire_cible, amis_communs, fichier_sortie="output/re
     print(f"Résultats sauvegardés dans: {fichier_sortie}")
     return resultat_formate
 
-# ====================================================================
-# FONCTION PRINCIPALE
-# ====================================================================
+
 def main():
     """
     

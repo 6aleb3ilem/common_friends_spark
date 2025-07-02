@@ -1,1 +1,10 @@
+RESULTATS DE L'ANALYSE DES AMIS COMMUNS
+==================================================
+Date d'exécution: 2025-07-02 10:35:33
 
+REQUETE: Amis communs entre Mohamed (ID 2) et Sidi (ID 1)
+REPONSE: 1 2 [3]
+
+INTERPRETATION:
+- Utilisateur 1 (Sidi) et utilisateur 2 (Mohamed)
+- Ont 1 ami(s) commun(s): [3]
